@@ -1,3 +1,4 @@
+{# app/Resources/views/home/test.php.twig #}
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,10 +14,10 @@
         </div>
         <div id="navbar" class="navbar-collapse-collapse">
           <ul class="nav navbar-nav">
-            <li class="active">
+            <li>
               <a href="/">Status</a>
             </li>
-            <li>
+            <li class="active">
               <a href="/addPin">GPIO</a>
             </li>
           </ul>
@@ -24,20 +25,23 @@
       </nav>
       <h1 style="text-align:center;">RaspiStatus - actual {{hostname}} status data</h1>
       <div class="row">
-        <div class="col-xs-12 col-sm-3">GPU Temperature: </div>
-        <div class="col-xs-12 col-sm-2">{{gputemperature}}</div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-3">CPU Temperature: </div>
-        <div class="col-xs-12 col-sm-2">{{cputemperature}}</div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-3">Actual CPU Frequency: </div>
-        <div class="col-xs-12 col-sm-2">{{cpufrequency}}</div>
+        <div class="col-sm-5 col-xs-14">
+          <p style="text-align: center" id="pinout">Raspberry Pi Model A and B</p>
+          <img src="images/piABPinout.png" class="center-block" id="pinoutImage"/>
+          <p style="text-align: center">Click on image to change RpiModel</p>
+        </div>
+        <div class="col-sm-4 col-xs-14">
+          <div class="form-group">
+            {{form_start(form)}}
+            {{form_widget(form)}}
+            {{form_end(form)}}
+          </div>
+        </div>
       </div>
 
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/cyclePinout.js"></script>
   </body>
 </html>

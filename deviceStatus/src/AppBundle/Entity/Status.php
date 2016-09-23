@@ -23,7 +23,7 @@ class Status
   */
   private $CPUTemp;
   /**
-  * @ORM\Column(type="integer")
+  * @ORM\Column(type="decimal")
   */
   private $CPUFrequency;
 
