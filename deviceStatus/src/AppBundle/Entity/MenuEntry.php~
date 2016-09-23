@@ -1,0 +1,25 @@
+<?php
+// src/AppBundle/Entity/MenuEntry.php
+namespace AppBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+/**
+* @ORM\Entity
+*/
+class MenuEntry
+{
+  /**
+  * @ORM\Column(type="integer")
+  * @ORM\Id
+  * @ORM\GeneratedValue(strategy="AUTO")
+  */
+  private $ID;
+  /**
+  * @ORM\Column(type="string", length=50)
+  */
+  private $MenuEntryLabel;
+  /**
+  * @ORM\Column(type="text")
+  */
+  private $Destination;
+}
+?>
