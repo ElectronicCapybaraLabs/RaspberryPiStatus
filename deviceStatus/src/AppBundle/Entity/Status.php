@@ -27,8 +27,6 @@ class Status
   */
   private $CPUFrequency;
 
-
-
     /**
      * Get iD
      *
@@ -110,4 +108,6 @@ class Status
     {
         return $this->CPUFrequency;
     }
+
+
 }

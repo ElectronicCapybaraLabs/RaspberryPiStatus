@@ -14,36 +14,45 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\HttpFoundation\Request;
 class HomeController extends Controller
 {
-    public function __construct()
-    {
-
-    }
     /**
      * @Route("/", name="home")
      */
     public function homeAction()
     {
-        $commandOutput = \AppBundle\Utils\FileInteractor::ExecuteFileAndGetContents("/opt/vc/bin/vcgencmd measure_temp");
-        $cpuCommandOutput = \AppBundle\Utils\FileInteractor::ExecuteFileAndGetContents("echo $((`cat /sys/class/thermal/thermal_zone0/temp`/1000))");
-        $hostname = \AppBundle\Utils\FileInteractor::ExecuteFileAndGetContents("hostname");
-        $actualCpuFrequency = \AppBundle\Utils\FileInteractor::ExecuteFileAndGetContents("lscpu | sed -n 9p");
-        $parsedCommandOutput = substr($commandOutput, 5); ///cut temp
-        $parsedCommandOutput = substr($parsedCommandOutput, 0,4); //now only the number
-        $actualCpuFrequency = substr($actualCpuFrequency, 13);
-        $actualStatus = new Status();
-        $actualStatus->setGPUTemp($parsedCommandOutput);
-        $actualStatus->setCPUTemp($cpuCommandOutput);
-        $actualStatus->setCPUFrequency($actualCpuFrequency);
-        $orm = $this->getDoctrine()->getManager();
-        $orm->persist($actualStatus);
-        $orm->flush();
-        return $this->render('home/home.php.twig', array(
-          'title' => "RaspiStatus",
-          'gputemperature' => $parsedCommandOutput,
-          'cputemperature' => $cpuCommandOutput,
-          'hostname' => $hostname,
-          'cpufrequency' => $actualCpuFrequency,
-      ));
+        /*
+        * I know that it its unsafe. Propose me another idea.
+        */
+        $path = \AppBundle\Utils\FileInteractor::ExecuteFileAndGetContents("pwd");
+        $firstRun = \AppBundle\Utils\FileInteractor::ExecuteFileAndGetContents("cat ".$path."/../src/AppBundle/Utils/firstrun.bin");
+        if($firstRun == 1)
+        {
+          return $this->redirect("/initApp", 302);
+        }
+        else
+        {
+          $commandOutput = \AppBundle\Utils\FileInteractor::ExecuteFileAndGetContents("/opt/vc/bin/vcgencmd measure_temp");
+          $cpuCommandOutput = \AppBundle\Utils\FileInteractor::ExecuteFileAndGetContents("echo $((`cat /sys/class/thermal/thermal_zone0/temp`/1000))");
+          $hostname = \AppBundle\Utils\FileInteractor::ExecuteFileAndGetContents("hostname");
+          $actualCpuFrequency = \AppBundle\Utils\FileInteractor::ExecuteFileAndGetContents("lscpu | sed -n 9p");
+          $parsedCommandOutput = substr($commandOutput, 5); ///cut temp
+          $parsedCommandOutput = substr($parsedCommandOutput, 0,4); //now only the number
+          $actualCpuFrequency = substr($actualCpuFrequency, 13);
+          $actualStatus = new Status();
+          $actualStatus->setGPUTemp($parsedCommandOutput);
+          $actualStatus->setCPUTemp($cpuCommandOutput);
+          $actualStatus->setCPUFrequency($actualCpuFrequency);
+          $orm = $this->getDoctrine()->getManager();
+          $orm->persist($actualStatus);
+          $orm->flush();
+          return $this->render('home/home.php.twig', array(
+            'title' => "RaspiStatus",
+            'gputemperature' => $parsedCommandOutput,
+            'cputemperature' => $cpuCommandOutput,
+            'hostname' => $hostname,
+            'cpufrequency' => $actualCpuFrequency,
+          ));
+        }
+
     }
     /**
      * @Route("/addPin", name="test")

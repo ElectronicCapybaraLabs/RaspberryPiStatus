@@ -26,8 +26,10 @@ class Status
   * @ORM\Column(type="decimal")
   */
   private $CPUFrequency;
-
-
+  /**
+  * @ORM\Column(type="boolean")
+  */
+  private $FirstRun;
 
     /**
      * Get iD
