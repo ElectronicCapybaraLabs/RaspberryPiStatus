@@ -71,7 +71,6 @@ class Pin
     public function setPinHeaderLocation($pinHeaderLocation)
     {
         $this->PinHeaderLocation = $pinHeaderLocation;
-
         return $this;
     }
 
@@ -88,21 +87,26 @@ class Pin
     /**
      * Set state
      *
-     * @param \int $state
+     * @param  $state
      *
      * @return Pin
      */
-    public function setState(\int $state)
+    public function setState($state)
     {
+      if($state == 1 || $state == 0)
+      {
         $this->State = $state;
-
-        return $this;
+      }else
+      {
+          $this->State = 0;
+      }
+      return $this;
     }
 
     /**
      * Get state
      *
-     * @return \int
+     * @return
      */
     public function getState()
     {

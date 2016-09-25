@@ -1,4 +1,2 @@
-deviceStatus
-============
-
-A Symfony project created on September 19, 2016, 4:58 pm.
+# RaspberryPiStatus
+A project to check RaspberryPi status and control GPIOs.

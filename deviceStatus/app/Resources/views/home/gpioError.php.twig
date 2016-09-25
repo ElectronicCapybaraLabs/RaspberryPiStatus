@@ -10,7 +10,7 @@
     <div class="container-fluid">
       <nav class="navbar navbar-default">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">RaspiStatus</a>
+          <a class="navbar-brand" href="/">{{title}}</a>
         </div>
         <div id="navbar" class="navbar-collapse-collapse">
           <ul class="nav navbar-nav">
@@ -23,22 +23,13 @@
           </ul>
         </div>
       </nav>
-      <h1 style="text-align:center;">RaspiStatus - add new controlled GPIO</h1>
-      <div class="row">
-        <div class="col-sm-5 col-xs-14">
-          <p style="text-align: center" id="pinout">Raspberry Pi Model A and B</p>
-          <img src="images/piABPinout.png" class="center-block" id="pinoutImage"/>
-          <p style="text-align: center">Click on image to change RpiModel</p>
-        </div>
-        <div class="col-sm-4 col-xs-14">
-          <div class="form-group">
-            {{form_start(form)}}
-            {{form_widget(form)}}
-            {{form_end(form)}}
-          </div>
+      <div class="container">
+        <div class="row">
+          <p class="text-danger">Could not add new pin, please try again.</p>
+          <p class="text-danger">Make sure that value you provided is not negative.</p>
+
         </div>
       </div>
-
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
